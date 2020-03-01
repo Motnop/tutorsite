@@ -1,4 +1,5 @@
 import json
+import random
 from flask import Flask
 from flask import request
 from flask import render_template
@@ -23,7 +24,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html', teachers=teachers, goals=goals_data)
+    return render_template('index.html', teachers=random.sample(teachers, 6), goals=goals_data)
 
 
 @app.route('/goals/<goal_id>/')
