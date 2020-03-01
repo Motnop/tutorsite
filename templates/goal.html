@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block container %}
+    <h1 class="h1 text-center w-50 mx-auto mt-1 py-5 mb-4">
+      <strong>
+        {% if goal != "" %}
+          {{ goal.icon }}<br />Преподаватели <br> {{ goal.value }}
+        {% else %}
+          <br />Все преподаватели <br>
+        {% endif %}
+      </strong>
+    </h1>
+
+    <div class="row">
+      <div class="col-12 col-lg-10 offset-lg-1 m-auto">
+
+        {% for teacher in teachers %}
+          {% include 'teacher_minicard.html' %}
+        {% endfor %}
+
+      </div>
+    </div>
+
+    <h2 class="text-center mt-5 mb-3">Не нашли своего репетитора?</h2>
+    <p class="text-center mb-4">Расскажите, кто вам нужен и мы подберем его сами</p>
+    <div class="text-center pb-5">
+        <a href="/search/" class="btn btn-primary">Заказать подбор</a>
+    </div>
+{% endblock %}
