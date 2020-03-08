@@ -11,7 +11,7 @@
 
               <h1 class="h2">{{ teacher.name }}</h1>
               <p>
-                  {% for goal_id in teacher.goals %}
+                  {% for goal_id in teacher.goals.split(',') %}
                     <span class="badge badge-secondary mr-2">
                       {{ goals_data[goal_id].value }}
                     </span>
