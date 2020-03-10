@@ -4,7 +4,7 @@
     <div class="row mt-5">
       <div class="col-10 col-md-6 offset-1 offset-md-3 mb-3">
 
-        <form action="/booking_done/" class="card mb-3" method="POST">
+        <form action="/booking/{{ teacher.id }}/{{ day }}/{{ time }}" class="card mb-3" method="POST">
           <div class="card-body text-center pt-5">
             <img src="{{ teacher.picture }}" class="mb-3" width="95" alt="{{ teacher.name }}">
             <h2 class="h5 card-title mt-2 mb-2">{{ teacher.name }}</h2>
@@ -12,6 +12,26 @@
             <p class="my-1">{{ weekdays[day] }}, {{ time|replace('-',':') }}</p>
           <hr />
           <div class="card-body mx-3">
+            {{ form.clientWeekday(value=day) }}
+            {{ form.clientTime(value=time) }}
+            {{ form.clientTeacher(value=teacher.id) }}
+
+            {{ form.clientName.label(class="mb-1 mt-2") }}
+            {{ form.clientName(class="form-control") }}
+            {{ form.clientPhone.label(class="mb-1 mt-2") }}
+            {{ form.clientPhone(class="form-control") }}
+            {{ form.submit(class="btn btn-primary btn-block mt-4") }}
+            {{ form.csrf_token }}
+            {% if form.errors %}
+              <ul class="error">
+                {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+                    {% for error in field_errors %}
+                        <li>{{ form[field_name].label }}: {{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+              </ul>
+            {% endif %}
+            <!--
               <div class="row">
                   <input class="form-control" type="hidden" name="clientWeekday" value="{{ day }}">
                   <input class="form-control" type="hidden" name="clientTime" value="{{ time }}">
@@ -22,6 +42,7 @@
             <label class="mb-1 mt-2" for="clientPhone">Ваш телефон</label>
             <input class="form-control" type="tel"  name="clientPhone" id="clientPhone">
             <input type="submit" class="btn btn-primary btn-block mt-4" value="Записаться на пробный урок">
+            -->
           </div>
         </form>
 
